@@ -1,6 +1,8 @@
 import click
 import pandas as pd
 import os
+import shutil
+from datetime import datetime
 
 # Path to the directory where habit CSV files will be stored
 HABIT_DIR = "habits"
@@ -98,7 +100,18 @@ def rm(habits):
     else:
         click.echo("Removal cancelled.")
         return
-    
+
+@cli.command()
+@click.argument("path")
+def backup(path): 
+    """
+    Create a backup of all habit data at a specified directory path.
+    """
+    current_datetime = datetime.now()
+    formatted_datetime = current_datetime.strftime("%Y-%m-%d_%H-%M-%S")
+    backup_dir_name = f"{path}/{formatted_datetime}"
+    shutil.copytree(HABIT_DIR, backup_dir_name)
+    click.echo(f"Backup created at {backup_dir_name}")
 
 if __name__ == "__main__":
     if not os.path.exists(HABIT_DIR):

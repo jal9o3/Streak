@@ -78,6 +78,26 @@ def list():
             habit_name = os.path.splitext(filename)[0]
             click.echo(f"\t{habit_name}")
 
+@cli.command()
+@click.argument('habits', nargs=-1)
+def rm(habits):
+    """Remove specified habits."""
+    user_response = input(
+            f"Remove {len(habits)} habits? (y/n): ").lower()
+    if user_response in ["y", "yes"]:
+        # TODO: remove CSV files of the specified habits
+        for habit in habits:
+            csv_file = os.path.join(HABIT_DIR, f"{habit}.csv")
+            if os.path.exists(csv_file):
+                os.remove(csv_file)
+                click.echo(f"Removed {habit}")
+            else:
+                click.echo(f"{habit} does not exist.")
+    else:
+        click.echo("Removal cancelled.")
+        return
+    
+
 if __name__ == "__main__":
     if not os.path.exists(HABIT_DIR):
         os.makedirs(HABIT_DIR)

@@ -13,7 +13,7 @@ def cli():
 @click.argument("habit_name")
 def track(habit_name):
     """
-    Track habit intensity for a given habit.
+    Record the activity for a specified habit.
     """
     habit_csv = os.path.join(HABIT_DIR, f"{habit_name}.csv")
 
@@ -50,7 +50,9 @@ def track(habit_name):
 @cli.command()
 @click.argument("habit_name")
 def show(habit_name):
-    """Show contents of all habit CSV files or a specific habit."""
+    """
+    Show contents of ALL habit CSV files OR only a specified habit.
+    """
     if habit_name == "all":
         for filename in os.listdir(HABIT_DIR):
             if filename.endswith(".csv"):
@@ -72,6 +74,7 @@ def show(habit_name):
 
 @cli.command()
 def list():
+    """List all registered habits."""
     click.echo("Your habits: ")
     for filename in os.listdir(HABIT_DIR):
         if filename.endswith(".csv"):
@@ -81,7 +84,7 @@ def list():
 @cli.command()
 @click.argument('habits', nargs=-1)
 def rm(habits):
-    """Remove specified habits."""
+    """Remove the specified habits."""
     user_response = input(
             f"Remove {len(habits)} habits? (y/n): ").lower()
     if user_response in ["y", "yes"]:

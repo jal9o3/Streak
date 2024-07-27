@@ -47,6 +47,18 @@ def track(habit_name):
 
     click.echo(f"Intensity for habit '{habit_name}' incremented for today.")
 
+@cli.command()
+def show():
+    """Show contents of all habit CSV files."""
+    for filename in os.listdir(HABIT_DIR):
+        if filename.endswith(".csv"):
+            habit_name = os.path.splitext(filename)[0]
+            csv_path = os.path.join(HABIT_DIR, filename)
+            df = pd.read_csv(csv_path)
+            click.echo(f"Habit: {habit_name}")
+            click.echo(df.to_string(index=False))
+            click.echo("\n" + "=" * 30)
+
 if __name__ == "__main__":
     if not os.path.exists(HABIT_DIR):
         os.makedirs(HABIT_DIR)

@@ -48,16 +48,27 @@ def track(habit_name):
     click.echo(f"Intensity for habit '{habit_name}' incremented for today.")
 
 @cli.command()
-def show():
-    """Show contents of all habit CSV files."""
-    for filename in os.listdir(HABIT_DIR):
-        if filename.endswith(".csv"):
-            habit_name = os.path.splitext(filename)[0]
-            csv_path = os.path.join(HABIT_DIR, filename)
+@click.argument("habit_name")
+def show(habit_name):
+    """Show contents of all habit CSV files or a specific habit."""
+    if habit_name == "all":
+        for filename in os.listdir(HABIT_DIR):
+            if filename.endswith(".csv"):
+                habit_name = os.path.splitext(filename)[0]
+                csv_path = os.path.join(HABIT_DIR, filename)
+                df = pd.read_csv(csv_path)
+                click.echo(f"Habit: {habit_name}")
+                click.echo(df.to_string(index=False))
+                click.echo("\n" + "=" * 30)
+    
+    else:
+        csv_path = os.path.join(HABIT_DIR, f"{habit_name}.csv")
+        if os.path.exists(csv_path):
             df = pd.read_csv(csv_path)
             click.echo(f"Habit: {habit_name}")
             click.echo(df.to_string(index=False))
-            click.echo("\n" + "=" * 30)
+        else:
+            click.echo(f"Habit '{habit_name}' not found.")
 
 if __name__ == "__main__":
     if not os.path.exists(HABIT_DIR):

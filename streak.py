@@ -85,7 +85,6 @@ def rm(habits):
     user_response = input(
             f"Remove {len(habits)} habits? (y/n): ").lower()
     if user_response in ["y", "yes"]:
-        # TODO: remove CSV files of the specified habits
         for habit in habits:
             csv_file = os.path.join(HABIT_DIR, f"{habit}.csv")
             if os.path.exists(csv_file):

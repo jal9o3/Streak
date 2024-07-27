@@ -70,6 +70,14 @@ def show(habit_name):
         else:
             click.echo(f"Habit '{habit_name}' not found.")
 
+@cli.command()
+def list():
+    click.echo("Your habits: ")
+    for filename in os.listdir(HABIT_DIR):
+        if filename.endswith(".csv"):
+            habit_name = os.path.splitext(filename)[0]
+            click.echo(f"\t{habit_name}")
+
 if __name__ == "__main__":
     if not os.path.exists(HABIT_DIR):
         os.makedirs(HABIT_DIR)

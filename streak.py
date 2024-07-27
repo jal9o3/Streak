@@ -18,21 +18,30 @@ def track(habit_name):
     habit_csv = os.path.join(HABIT_DIR, f"{habit_name}.csv")
 
     if not os.path.exists(habit_csv):
-        # Create a new CSV file for the habit
-        df = pd.DataFrame(columns=["date", "intensity"])
-        df.to_csv(habit_csv, index=False)
 
-    # Increment intensity for today's date
+        user_response = input(
+            f"Habit {habit_name} does not exist. Create it? (y/n): ").lower()
+        if user_response in ["y", "yes"]:
+            # Create a new CSV file for the habit
+            df = pd.DataFrame(columns=["date", "intensity"])
+            df.to_csv(habit_csv, index=False)
+            click.echo(f"Habit {habit_name} created succesfully.")
+        else:
+            click.echo(f"Habit {habit_name} not created.")
+            return
+
+    # Get the current date
     today = pd.Timestamp.now().strftime("%Y-%m-%d")
+    # Read the appropriate CSV
     df = pd.read_csv(habit_csv)
-    # TODO: make sure there is an entry for today's date
+
     # Check if today's date exists in the DataFrame
     if today not in df["date"].values:
         # Create a new row with today's date and initial intensity value
-        new_row = {"date": today, "intensity": 0}  # You can adjust the initial value as needed
+        new_row = {"date": today, "intensity": 0}  # Set initial intensity to 0
         df = df._append(new_row, ignore_index=True)
 
-
+    # Increment intensity for today's date
     df.loc[df["date"] == today, "intensity"] = df["intensity"] + 1
     df.to_csv(habit_csv, index=False)
 

@@ -88,7 +88,7 @@ def list():
 def rm(habits):
     """Remove the specified habits."""
     user_response = input(
-            f"Remove {len(habits)} habits? (y/n): ").lower()
+            f"Remove {len(habits)} habit(s)? (y/n): ").lower()
     if user_response in ["y", "yes"]:
         for habit in habits:
             csv_file = os.path.join(HABIT_DIR, f"{habit}.csv")
@@ -113,7 +113,25 @@ def backup(path):
     shutil.copytree(HABIT_DIR, backup_dir_name)
     click.echo(f"Backup created at {backup_dir_name}")
 
+@cli.command()
+@click.argument("path")
+def load(path): 
+    """
+    Load a backup of the data from a specified directory path.
+    """
+    # Verify that the backup format is correct.
+    try:
+        if datetime.strptime(path.split("/")[-1], "%Y-%m-%d_%H-%M-%S"):
+            # Remove all the currently stored data
+            shutil.rmtree(HABIT_DIR)
+            # Copy contents from the backup directory to the active HABIT_DIR
+            shutil.copytree(path, HABIT_DIR, dirs_exist_ok=True)
+            click.echo(f"Loaded backup from {path} successfully.")
+    except ValueError:
+        click.echo("Invalid backup path format. Please provide a valid format.")
+
 if __name__ == "__main__":
     if not os.path.exists(HABIT_DIR):
         os.makedirs(HABIT_DIR)
     cli()
+

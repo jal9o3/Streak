@@ -50,3 +50,20 @@ Commands:
   show    Show contents of ALL habit CSV files OR only a specified habit.
   track   Record the activity for a specified habit.
 ```
+
+## Usage
+As demonstrated in the previous section, you may check the help page using the
+`--help` or `-h` options.
+### Habit Tracking
+You can record the observance of a habit through:
+```
+streak track habit_name
+```
+If this is a new habit, streak will prompt for the creation of the habit in the
+records. It will then proceed to increment the `intensity` of the habit, which
+should represent how often you do a habit.
+```
+Habit habit_name does not exist. Create it? (y/n): y
+Habit habit_name created succesfully.
+Intensity for habit 'habit_name' incremented for today.
+```

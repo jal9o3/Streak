@@ -142,5 +142,37 @@ Example Habit F
 ==============================
 ```
 ### Removing Habits
+You can remove habits through the `rm` command. For example:
+```
+streak rm "Your Habit" "Another Habit"
+```
+Output:
+```
+Remove 2 habit(s)? (y/n): y
+Removed Your Habit
+Removed Another Habit
+```
+You can specify as many habits to remove as you want. You may verify the updated
+habit list using the `list` or `show` commands.
 ### Backing Up Records
+Backups could be created using the `backup` command:
+```
+streak backup ~/Documents/streak
+```
+You can replace `~/Documents/streak` with the location where you intend 
+to store the backup. 
+The command should output something similar to this:
+```
+Backup created at /home/user/Documents/streak/2024-07-28_18-15-01
+```
 ### Restoring from Backup
+Restore your backups using `load`.
+```
+streak load ~/Documents/streak/2024-07-28_16-48-24
+```
+Replace `~/Documents/streak/2024-07-28_16-48-24` with the path to your backup.
+The output should be like this:
+```
+Loaded backup from /home/romlor/Documents/streak/2024-07-28_16-48-24 successfully.
+```
+You may verify the record restoration using the `list` or `show` commands.

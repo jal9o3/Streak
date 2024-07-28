@@ -34,14 +34,14 @@ def track(habit_name):
     if not os.path.exists(habit_csv):
 
         user_response = input(
-            f"Habit {habit_name} does not exist. Create it? (y/n): ").lower()
+            f"Habit '{habit_name}' does not exist. Create it? (y/n): ").lower()
         if user_response in ["y", "yes"]:
             # Create a new CSV file for the habit
             df = pd.DataFrame(columns=["date", "intensity"])
             df.to_csv(habit_csv, index=False)
-            click.echo(f"Habit {habit_name} created succesfully.")
+            click.echo(f"Habit '{habit_name}' created succesfully.")
         else:
-            click.echo(f"Habit {habit_name} not created.")
+            click.echo(f"Habit '{habit_name}' not created.")
             return
 
     # Get the current date

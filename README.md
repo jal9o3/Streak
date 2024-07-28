@@ -57,13 +57,31 @@ As demonstrated in the previous section, you may check the help page using the
 ### Habit Tracking
 You can record the observance of a habit through:
 ```
-streak track habit_name
+streak track "Your Habit"
 ```
 If this is a new habit, streak will prompt for the creation of the habit in the
 records. It will then proceed to increment the `intensity` of the habit, which
 should represent how often you do a habit.
 ```
-Habit habit_name does not exist. Create it? (y/n): y
-Habit habit_name created succesfully.
-Intensity for habit 'habit_name' incremented for today.
+Habit 'Your Habit' does not exist. Create it? (y/n): y
+Habit 'Your Habit' created succesfully.
+Intensity for habit 'Your Habit' incremented for today.
+```
+Tracking existing habits will only output the last line.
+### Listing Habit Streaks
+You can see all your daily habit streaks through:
+```
+streak list
+```
+The output should look like this:
+```
+Your habit streaks: 
+        Example Habit A
+                16 DAYS
+        Example Habit B
+                1 DAY
+        Example Habit C
+                2 DAYS
+        Example Habit D
+                500 DAYS
 ```

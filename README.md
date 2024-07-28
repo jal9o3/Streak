@@ -53,7 +53,8 @@ Commands:
 
 ## Usage
 As demonstrated in the previous section, you may check the help page using the
-`--help` or `-h` options.
+`--help` or `-h` options. The subsequent sections also provides examples and 
+explanations to guide you through the usage of this tool.
 ### Habit Tracking
 You can record the observance of a habit through:
 ```

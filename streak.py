@@ -125,15 +125,20 @@ def calculate_streak(df):
 @cli.command()
 def list():
     """List all registered habits."""
-    click.echo("Your habits: ")
+    click.echo("Your habit streaks: ")
     for filename in os.listdir(HABIT_DIR):
         if filename.endswith(".csv"):
             habit_name = os.path.splitext(filename)[0]
-            click.echo(f"\t{habit_name}", nl=False)
+            click.echo(f"\t{habit_name}")
             csv_path = os.path.join(HABIT_DIR, filename)
             df = pd.read_csv(csv_path)
             streak = calculate_streak(df)
-            click.echo(f"\t{streak} day(s)")
+            click.echo(f"\t\t{streak} DAY", nl=False)
+            # Handle when streak is only one day
+            if streak == 1:
+                click.echo()
+            else:
+                click.echo("S")
 
 @cli.command()
 @click.argument('habits', nargs=-1)

@@ -2,7 +2,10 @@ import click
 import pandas as pd
 import os
 import shutil
-from datetime import datetime
+import logging
+from datetime import datetime, timedelta
+
+logger = logging.getLogger(__name__)
 
 # Path to the directory where habit CSV files will be stored
 HABIT_DIR = "habits"
@@ -75,6 +78,41 @@ def show(habit_name):
         else:
             click.echo(f"Habit '{habit_name}' not found.")
 
+def calculate_streak(df):
+    logging.basicConfig(level=logging.FATAL)
+    logger.debug(f"Rows: {df.shape[0]}")
+
+    # Initialize streak counter
+    streak = 0
+
+    # Convert 'date' column to datetime objects
+    df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d')
+    
+    # Get today's date
+    today = pd.to_datetime('today').normalize()
+    logger.debug(f"Today: {today}")
+    logger.debug(f"Date Values: {df['date'].values}")
+
+    for i, value in enumerate(df['date'].values):
+        # Check if there's an entry for today
+        if today in df['date'].values:
+            streak += 1
+        # Handle if current date is not yet recorded
+        elif today not in df['date'].values and i == 0:
+            # Get yesterday's date
+            today -= pd.Timedelta("1 day")
+            if today in df['date'].values:
+                streak += 1
+                continue
+        elif i > 0: # If missing entry is not current date
+            streak = 0
+        
+        # Get yesterday's date
+        today -= pd.Timedelta("1 day")
+        
+
+    return streak
+
 @cli.command()
 def list():
     """List all registered habits."""
@@ -82,7 +120,11 @@ def list():
     for filename in os.listdir(HABIT_DIR):
         if filename.endswith(".csv"):
             habit_name = os.path.splitext(filename)[0]
-            click.echo(f"\t{habit_name}")
+            click.echo(f"\t{habit_name}", nl=False)
+            csv_path = os.path.join(HABIT_DIR, filename)
+            df = pd.read_csv(csv_path)
+            streak = calculate_streak(df)
+            click.echo(f"\t{streak} day(s)")
 
 @cli.command()
 @click.argument('habits', nargs=-1)

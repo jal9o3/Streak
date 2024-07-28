@@ -15,7 +15,7 @@ git clone https://github.com/jal9o3/Streak.git
 
 Then, `cd` into the cloned directory. 
 
-### Creating an Environment
+### Creating an Environment (optional)
 You may setup `virtualenv` as recommended 
 by the [click documentation](https://click.palletsprojects.com/en/8.1.x/quickstart/#virtualenv).
 
@@ -174,6 +174,16 @@ streak load ~/Documents/streak/2024-07-28_16-48-24
 Replace `~/Documents/streak/2024-07-28_16-48-24` with the path to your backup.
 The output should be like this:
 ```
-Loaded backup from /home/romlor/Documents/streak/2024-07-28_16-48-24 successfully.
+Loaded backup from /home/user/Documents/streak/2024-07-28_16-48-24 successfully.
 ```
 You may verify the record restoration using the `list` or `show` commands.
+
+## Samples
+### Minimalist CLI Pomodoro Setup
+streak could be used to track the number of pomodoro sessions that had been
+finished during the day. For example:
+```
+sleep 1500 && zenity --warning --text="Break Time!" && streak track pomodoro
+```
+This will run `sleep` for 1500 seconds (25 minutes), notify afterwards using 
+`zenity`, and note the focus session using `streak`.

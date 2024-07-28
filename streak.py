@@ -61,7 +61,7 @@ def show(habit_name):
                 habit_name = os.path.splitext(filename)[0]
                 csv_path = os.path.join(HABIT_DIR, filename)
                 df = pd.read_csv(csv_path)
-                click.echo(f"Habit: {habit_name}")
+                click.echo(f"\n{habit_name}")
                 click.echo(df.to_string(index=False))
                 click.echo("\n" + "=" * 30)
     
@@ -69,8 +69,9 @@ def show(habit_name):
         csv_path = os.path.join(HABIT_DIR, f"{habit_name}.csv")
         if os.path.exists(csv_path):
             df = pd.read_csv(csv_path)
-            click.echo(f"Habit: {habit_name}")
+            click.echo(f"\n{habit_name}")
             click.echo(df.to_string(index=False))
+            click.echo("\n")
         else:
             click.echo(f"Habit '{habit_name}' not found.")
 

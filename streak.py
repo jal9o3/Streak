@@ -4,11 +4,15 @@ import os
 import shutil
 import logging
 from datetime import datetime
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
 # Path to the directory where habit CSV files will be stored
-HABIT_DIR = "habits"
+HABIT_DIR = str(Path.home().expanduser()) + "/streak"
+
+if not os.path.exists(HABIT_DIR):
+    os.makedirs(HABIT_DIR)
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
@@ -179,7 +183,5 @@ def load(path):
         click.echo("Invalid backup path format. Please provide a valid format.")
 
 if __name__ == "__main__":
-    if not os.path.exists(HABIT_DIR):
-        os.makedirs(HABIT_DIR)
     cli()
 

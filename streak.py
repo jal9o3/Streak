@@ -3,15 +3,20 @@ import pandas as pd
 import os
 import shutil
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
 # Path to the directory where habit CSV files will be stored
 HABIT_DIR = "habits"
 
-@click.group()
+CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
+
+@click.group(context_settings=CONTEXT_SETTINGS)
 def cli():
+    """
+    streak is a minimalist cli tool for tracking daily habits.
+    """
     pass
 
 @cli.command()

@@ -6,7 +6,7 @@ Created using the [click](https://click.palletsprojects.com/en/8.1.x/) package.
 
 ## Setup
 
-The recommended way of obtaining streak is 
+The recommended way of obtaining `streak` is 
 by cloning from the git repository.
 
 ```
@@ -85,3 +85,62 @@ Your habit streaks:
         Example Habit D
                 500 DAYS
 ```
+### Showing Habit Records
+You can see more detailed records through:
+```
+streak show "Your Habit"
+```
+The output should be like this:
+```
+Your Habit
+      date  intensity
+2024-07-27          1
+2024-07-28          4
+```
+To show all records:
+```
+streak show all
+```
+The output should be like this:
+```
+
+Example Habit A
+      date  intensity
+2024-07-27          5
+
+==============================
+
+Example Habit B
+      date  intensity
+2024-07-27          3
+
+==============================
+
+Example Habit C
+      date  intensity
+2024-07-28          1
+
+==============================
+
+Example Habit D
+      date  intensity
+2024-07-28          1
+
+==============================
+
+Example Habit E
+      date  intensity
+2024-07-27          1
+2024-07-28          4
+
+==============================
+
+Example Habit F
+      date  intensity
+2024-07-28          3
+
+==============================
+```
+### Removing Habits
+### Backing Up Records
+### Restoring from Backup

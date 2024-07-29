@@ -149,8 +149,8 @@ streak rm "Your Habit" "Another Habit"
 Output:
 ```
 Remove 2 habit(s)? (y/n): y
-Removed Your Habit
-Removed Another Habit
+Removed 'Your Habit'
+Removed 'Another Habit'
 ```
 You can specify as many habits to remove as you want. You may verify the updated
 habit list using the `ls` or `show` commands.

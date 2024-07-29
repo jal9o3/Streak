@@ -123,7 +123,7 @@ def calculate_streak(df):
     return streak
 
 @cli.command()
-def list():
+def ls():
     """List all registered habits."""
     click.echo("Your habit streaks: ")
     for filename in os.listdir(HABIT_DIR):

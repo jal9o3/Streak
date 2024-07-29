@@ -44,8 +44,8 @@ Options:
 
 Commands:
   backup  Create a backup of all habit data at a specified directory path.
-  list    List all registered habits.
   load    Load a backup of the data from a specified directory path.
+  ls      List all registered habits.
   rm      Remove the specified habits.
   show    Show contents of ALL habit CSV files OR only a specified habit.
   track   Record the activity for a specified habit.
@@ -71,7 +71,7 @@ Tracking existing habits will only output the last line.
 ### Listing Habit Streaks
 You can see all your daily habit streaks through:
 ```
-streak list
+streak ls
 ```
 The output should look like this:
 ```
@@ -153,7 +153,7 @@ Removed Your Habit
 Removed Another Habit
 ```
 You can specify as many habits to remove as you want. You may verify the updated
-habit list using the `list` or `show` commands.
+habit list using the `ls` or `show` commands.
 ### Backing Up Records
 Backups could be created using the `backup` command:
 ```
@@ -175,4 +175,4 @@ The output should be like this:
 ```
 Loaded backup from /home/romlor/Documents/streak/2024-07-28_16-48-24 successfully.
 ```
-You may verify the record restoration using the `list` or `show` commands.
+You may verify the record restoration using the `ls` or `show` commands.

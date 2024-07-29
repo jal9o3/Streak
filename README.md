@@ -176,7 +176,7 @@ The output should be like this:
 ```
 Loaded backup from /home/user/Documents/streak/2024-07-28_16-48-24 successfully.
 ```
-You may verify the record restoration using the `list` or `show` commands.
+You may verify the record restoration using the `ls` or `show` commands.
 
 ## Samples
 ### Minimalist CLI Pomodoro Setup

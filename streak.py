@@ -123,7 +123,7 @@ def calculate_streak(df):
     return streak
 
 @cli.command()
-def list():
+def ls():
     """List all registered habits."""
     click.echo("Your habit streaks: ")
     for filename in os.listdir(HABIT_DIR):
@@ -151,9 +151,9 @@ def rm(habits):
             csv_file = os.path.join(HABIT_DIR, f"{habit}.csv")
             if os.path.exists(csv_file):
                 os.remove(csv_file)
-                click.echo(f"Removed {habit}")
+                click.echo(f"Removed '{habit}'")
             else:
-                click.echo(f"{habit} does not exist.")
+                click.echo(f"'{habit}' does not exist.")
     else:
         click.echo("Removal cancelled.")
         return

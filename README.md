@@ -16,6 +16,10 @@ git clone https://github.com/jal9o3/Streak.git
 Then, `cd` into the cloned directory. 
 
 ### Creating an Environment (optional)
+streak requires `Click` and `pandas` to work. Installing in an isolated
+environment would prevent possible conflicts with existing versions of these 
+dependencies.
+
 You may setup `virtualenv` as recommended 
 by the [click documentation](https://click.palletsprojects.com/en/8.1.x/quickstart/#virtualenv).
 
